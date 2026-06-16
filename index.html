@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="DavidStudio.Web — Criação de sites modernos, rápidos e profissionais para empresas locais. Landing pages, integração WhatsApp e Google Maps." />
+<title>DavidStudio.Web — Sites profissionais para empresas locais</title>
+<link rel="icon" type="image/png" href="logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f6f7f9;
+    --ink:#0b0d10;
+    --ink-2:#1a1d22;
+    --muted:#5b6470;
+    --line:#e7e9ee;
+    --brand:#2684FF;
+    --brand-2:#0a5fd8;
+    --shadow-sm:0 4px 14px rgba(10,15,30,.06);
+    --shadow-md:0 12px 40px rgba(10,15,30,.08);
+    --shadow-lg:0 30px 80px rgba(10,15,30,.12);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .container{width:100%;max-width:1180px;margin:0 auto;padding:0 22px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);background:rgba(38,132,255,.08);padding:8px 14px;border-radius:999px}
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(38,132,255,.18)}
+  h1,h2,h3{font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+  h2{font-size:clamp(28px,4vw,44px)}
+  h3{font-size:18px;font-weight:700}
+  p.lead{color:var(--muted);font-size:17px;max-width:640px}
+  .section{padding:96px 0;position:relative}
+  .section-head{text-align:center;margin-bottom:56px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .section-head p{color:var(--muted);max-width:580px}
+
+  /* HEADER */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid transparent;transition:.3s}
+  .nav.scrolled{border-color:var(--line);box-shadow:var(--shadow-sm)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em}
+  .brand img{width:36px;height:36px;border-radius:9px}
+  .brand span{font-size:16px}
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink-2);transition:.2s}
+  .nav-links a:hover{color:var(--brand)}
+  .nav-cta{display:inline-flex;align-items:center;gap:8px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;width:40px;height:40px;align-items:center;justify-content:center;border-radius:10px}
+  .menu-btn:hover{background:var(--bg-soft)}
+  .menu-btn span{display:block;width:20px;height:2px;background:var(--ink);position:relative}
+  .menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--ink);transition:.25s}
+  .menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:600;font-size:15px;cursor:pointer;border:0;transition:transform .2s ease,box-shadow .25s ease,background .2s;white-space:nowrap}
+  .btn-primary{background:var(--ink);color:#fff;box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);background:var(--ink-2)}
+  .btn-brand{background:var(--brand);color:#fff;box-shadow:0 10px 30px rgba(38,132,255,.35)}
+  .btn-brand:hover{transform:translateY(-2px);background:var(--brand-2);box-shadow:0 14px 40px rgba(38,132,255,.45)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);background:var(--bg-soft)}
+  .btn-lg{padding:18px 28px;font-size:16px;border-radius:14px}
+
+  /* HERO */
+  .hero{padding:80px 0 80px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(38,132,255,.18),transparent 60%);filter:blur(20px);z-index:0}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative;z-index:1}
+  .hero h1{font-size:clamp(34px,5.2vw,60px);letter-spacing:-.03em;line-height:1.05}
+  .hero h1 .accent{background:linear-gradient(120deg,var(--brand),#7eb6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:18px;margin:22px 0 32px;max-width:540px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-meta{display:flex;gap:28px;margin-top:40px;flex-wrap:wrap}
+  .hero-meta div{display:flex;flex-direction:column}
+  .hero-meta strong{font-size:22px;font-weight:800;color:var(--ink)}
+  .hero-meta small{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* Hero mockup */
+  .mockup{position:relative;perspective:1400px;animation:floatY 6s ease-in-out infinite}
+  .browser{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;transform:rotateY(-6deg) rotateX(4deg)}
+  .browser-bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);background:#fafbfc}
+  .browser-bar i{width:11px;height:11px;border-radius:50%;background:#e8eaee}
+  .browser-bar i:nth-child(1){background:#ff5f57}
+  .browser-bar i:nth-child(2){background:#febc2e}
+  .browser-bar i:nth-child(3){background:#28c840}
+  .browser-bar .url{margin-left:14px;flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--muted)}
+  .browser-body{padding:22px;background:linear-gradient(180deg,#fff,#f6f8fb)}
+  .mk-hero{height:120px;border-radius:12px;background:linear-gradient(135deg,#0b0d10,#1a1d22);position:relative;overflow:hidden;display:flex;align-items:center;padding:0 20px;color:#fff}
+  .mk-hero::after{content:"";position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(38,132,255,.5),transparent 65%)}
+  .mk-hero h4{font-size:14px;font-weight:700}
+  .mk-hero h4 span{color:var(--brand)}
+  .mk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .mk-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;height:80px;display:flex;flex-direction:column;gap:6px}
+  .mk-card .b{height:8px;border-radius:4px;background:var(--line)}
+  .mk-card .b.s{width:60%}
+  .mk-card .dot{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--brand),#7eb6ff)}
+  .mk-bars{margin-top:14px;display:flex;gap:6px;align-items:flex-end;height:46px}
+  .mk-bars b{flex:1;background:var(--line);border-radius:4px;display:block}
+  .mk-bars b:nth-child(2){background:var(--brand);height:80%}
+  .mk-bars b:nth-child(4){background:var(--ink);height:60%}
+
+  .floater{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
+  .floater .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff}
+  .float-wa{bottom:-18px;left:-18px;animation:floatY 5s ease-in-out infinite reverse}
+  .float-wa .ico{background:#25D366}
+  .float-stat{top:-18px;right:-10px;animation:floatY 7s ease-in-out infinite}
+  .float-stat .ico{background:var(--brand)}
+  .float-stat small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  /* SERVICES */
+  .services{background:var(--bg-soft)}
+  .grid-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.3s;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(38,132,255,.05),transparent 60%);opacity:0;transition:.3s}
+  .card:hover{transform:translateY(-6px);border-color:rgba(38,132,255,.4);box-shadow:var(--shadow-md)}
+  .card:hover::before{opacity:1}
+  .card .icon{width:48px;height:48px;border-radius:12px;background:rgba(38,132,255,.1);color:var(--brand);display:grid;place-items:center;margin-bottom:18px;font-size:22px}
+  .card h3{margin-bottom:8px}
+  .card p{color:var(--muted);font-size:14.5px}
+
+  /* PROCESS */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;transition:.3s}
+  .step:hover{border-color:var(--brand);transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+  .step .num{font-size:42px;font-weight:900;background:linear-gradient(135deg,var(--brand),#7eb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:14px;display:block}
+  .step h3{margin-bottom:6px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* PROJECT */
+  .projects{background:var(--bg-soft)}
+  .project{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px;box-shadow:var(--shadow-sm)}
+  .project-visual{background:linear-gradient(135deg,#0b0d10,#1a1d22);border-radius:18px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#fff;position:relative;overflow:hidden}
+  .project-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+  .project-visual .badge{position:relative;text-align:center;padding:30px}
+  .project-visual .badge i{display:inline-flex;width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);align-items:center;justify-content:center;font-size:28px;margin-bottom:14px;backdrop-filter:blur(10px)}
+  .project-visual .badge h4{font-size:22px;font-weight:800;margin-bottom:6px}
+  .project-visual .badge small{color:rgba(255,255,255,.6);font-size:13px}
+  .project-info .tag{display:inline-block;padding:5px 12px;background:rgba(38,132,255,.1);color:var(--brand);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  .project-info h3{font-size:28px;margin-bottom:14px}
+  .project-info p{color:var(--muted);margin-bottom:18px}
+  .project-info ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px;margin-bottom:24px}
+  .project-info li{font-size:14px;color:var(--ink-2);display:flex;align-items:center;gap:8px}
+  .project-info li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand)}
+
+  /* WHY */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .why-list{display:flex;flex-direction:column;gap:14px}
+  .why-item{display:flex;align-items:center;gap:16px;padding:18px 22px;background:#fff;border:1px solid var(--line);border-radius:14px;transition:.25s}
+  .why-item:hover{border-color:var(--brand);transform:translateX(6px);box-shadow:var(--shadow-sm)}
+  .why-item .check{width:34px;height:34px;border-radius:10px;background:rgba(38,132,255,.1);color:var(--brand);display:grid;place-items:center;flex-shrink:0}
+  .why-item span{font-weight:600;color:var(--ink-2)}
+
+  /* CTA */
+  .cta-wrap{background:linear-gradient(135deg,#0b0d10 0%,#1a1d22 100%);border-radius:28px;padding:70px 50px;text-align:center;position:relative;overflow:hidden;color:#fff}
+  .cta-wrap::before{content:"";position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(38,132,255,.35),transparent 60%);filter:blur(10px)}
+  .cta-wrap > *{position:relative}
+  .cta-wrap h2{color:#fff;font-size:clamp(28px,4vw,42px);margin-bottom:14px}
+  .cta-wrap p{color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 32px}
+  .cta-wrap .btn-brand{padding:20px 34px;font-size:17px}
+
+  /* FOOTER */
+  footer{padding:60px 0 30px;border-top:1px solid var(--line);background:var(--bg-soft)}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .foot-brand p{color:var(--muted);font-size:14px;margin-top:14px;max-width:320px}
+  .foot-col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;color:var(--ink)}
+  .foot-col a{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:10px;transition:.2s}
+  .foot-col a:hover{color:var(--brand)}
+  .foot-bot{padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:10px}
+
+  /* Floating WhatsApp */
+  .wa-fab{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 40px rgba(37,211,102,.45);z-index:40;transition:.25s;animation:pulse 2.5s infinite}
+  .wa-fab:hover{transform:scale(1.08)}
+  @keyframes pulse{0%{box-shadow:0 14px 40px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.4)}70%{box-shadow:0 14px 40px rgba(37,211,102,.45),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 14px 40px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,0)}}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media (max-width:960px){
+    .hero-grid,.why-grid,.project{grid-template-columns:1fr;gap:50px}
+    .grid-cards{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .project{padding:28px}
+  }
+  @media (max-width:680px){
+    .nav-links,.nav .btn{display:none}
+    .menu-btn{display:inline-flex}
+    .nav.open .nav-links{display:flex;position:absolute;top:72px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;gap:14px;border-bottom:1px solid var(--line);box-shadow:var(--shadow-md)}
+    .section{padding:70px 0}
+    .hero{padding:50px 0 60px}
+    .grid-cards{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .project-info ul{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr;gap:30px}
+    .foot-bot{flex-direction:column;text-align:center}
+    .cta-wrap{padding:50px 24px}
+    .hero-meta{gap:20px}
+    .hero-meta strong{font-size:18px}
+    .container{padding:0 18px}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand">
+      <img src="logo.png" alt="DavidStudio.Web" />
+      <span>DavidStudio<span style="color:var(--brand)">.Web</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Processo</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#porque">Por que ter</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a href="https://wa.me/5548996507636" target="_blank" class="btn btn-primary nav-cta">Solicitar orçamento</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Agência digital · Santa Catarina</span>
+        <h1 style="margin-top:18px">Transformo empresas locais em negócios mais <span class="accent">profissionais na internet.</span></h1>
+        <p>Crio sites modernos, rápidos e pensados para gerar mais credibilidade e facilitar o contato com seus clientes.</p>
+        <div class="hero-ctas">
+          <a href="https://wa.me/5548996507636?text=Olá%20David!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn btn-brand">Solicitar orçamento →</a>
+          <a href="#projetos" class="btn btn-ghost">Ver projetos</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>+100%</strong><small>Credibilidade</small></div>
+          <div><strong>24/7</strong><small>Atendimento online</small></div>
+          <div><strong>1ª página</strong><small>Visível no Google</small></div>
+        </div>
+      </div>
+
+      <div class="reveal" style="position:relative">
+        <div class="mockup">
+          <div class="browser">
+            <div class="browser-bar">
+              <i></i><i></i><i></i>
+              <div class="url">seunegocio.com.br</div>
+            </div>
+            <div class="browser-body">
+              <div class="mk-hero"><h4>Seu negócio <span>online.</span></h4></div>
+              <div class="mk-cards">
+                <div class="mk-card"><div class="dot"></div><div class="b"></div><div class="b s"></div></div>
+                <div class="mk-card"><div class="dot" style="background:linear-gradient(135deg,#0b0d10,#1a1d22)"></div><div class="b"></div><div class="b s"></div></div>
+                <div class="mk-card"><div class="dot" style="background:linear-gradient(135deg,#25D366,#0fa856)"></div><div class="b"></div><div class="b s"></div></div>
+              </div>
+              <div class="mk-bars"><b style="height:40%"></b><b></b><b style="height:55%"></b><b></b><b style="height:35%"></b><b style="height:70%"></b></div>
+            </div>
+          </div>
+          <div class="floater float-wa">
+            <span class="ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2.1-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.3 3.6 5.7 5 2.1.8 3 .9 4 .8.6-.1 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4 0-.1-.3-.2-.6-.3M12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.5-1.2c1.4.7 3 1.2 4.5 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2"/></svg>
+            </span>
+            <div>Novo contato!<br><small style="color:var(--muted);font-weight:500;font-size:11px">via WhatsApp</small></div>
+          </div>
+          <div class="floater float-stat">
+            <span class="ico">⚡</span>
+            <div>Site rápido<small>Carregamento 0.8s</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section services" id="servicos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">O que eu faço</span>
+        <h2>Soluções completas para o seu negócio brilhar online</h2>
+        <p>Tudo o que sua empresa precisa para ter uma presença digital profissional e converter visitantes em clientes.</p>
+      </div>
+      <div class="grid-cards">
+        <div class="card reveal"><div class="icon">🌐</div><h3>Sites profissionais</h3><p>Sites institucionais modernos, responsivos e otimizados para passar credibilidade.</p></div>
+        <div class="card reveal"><div class="icon">📱</div><h3>Landing pages</h3><p>Páginas focadas em conversão, ideais para campanhas, lançamentos e promoções.</p></div>
+        <div class="card reveal"><div class="icon">📍</div><h3>Google Maps</h3><p>Integração nativa para clientes encontrarem seu endereço com um clique.</p></div>
+        <div class="card reveal"><div class="icon">💬</div><h3>Botão WhatsApp</h3><p>Atendimento direto e instantâneo, transformando visitas em vendas reais.</p></div>
+        <div class="card reveal"><div class="icon">⚡</div><h3>Sites rápidos</h3><p>Performance de ponta para reter o visitante e ranquear bem no Google.</p></div>
+        <div class="card reveal"><div class="icon">🔧</div><h3>Manutenção e suporte</h3><p>Atualizações, ajustes e segurança contínuos para seu site nunca parar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="processo">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Como funciona</span>
+        <h2>Um processo simples, direto e sem complicação</h2>
+        <p>Em 4 passos seu negócio entra no ar com um site moderno e profissional.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><span class="num">01</span><h3>Contato</h3><p>Você entra em contato pelo WhatsApp e me conta sobre seu negócio.</p></div>
+        <div class="step reveal"><span class="num">02</span><h3>Análise</h3><p>Analiso seu mercado, público e necessidades para propor a melhor solução.</p></div>
+        <div class="step reveal"><span class="num">03</span><h3>Desenvolvimento</h3><p>Desenvolvo seu site com design moderno, rápido e responsivo.</p></div>
+        <div class="step reveal"><span class="num">04</span><h3>No ar</h3><p>Seu site vai para o ar pronto para atrair e conquistar novos clientes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section projects" id="projetos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Projetos</span>
+        <h2>Trabalhos que geram resultados reais</h2>
+      </div>
+      <div class="project-visual">
+
+        <img
+          src="mercado.png"
+          alt="Projeto Mercado Praia do Sol"
+          class="project-image"
+        >
+      
+      </div>
+        <div class="project-info">
+          <span class="tag">Mercado · Comércio local</span>
+          <h3>Site moderno para mini mercado de bairro</h3>
+          <p>Um site completo desenvolvido para destacar promoções, facilitar o atendimento e atrair clientes da vizinhança com presença digital profissional.</p>
+          <ul>
+            <li>Promoções da semana</li>
+            <li>Horários de funcionamento</li>
+            <li>Localização no Google Maps</li>
+            <li>Galeria de fotos</li>
+            <li>Botão direto do WhatsApp</li>
+            <li>100% responsivo</li>
+          </ul>
+          <a href="https://davidwebstudio.github.io/mercado-praia-do-sol/" target="_blank" class="btn btn-primary">Ver projeto →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section" id="porque">
+    <div class="container">
+      <div class="why-grid">
+        <div class="reveal">
+          <span class="eyebrow">Por que ter um site?</span>
+          <h2 style="margin:14px 0 18px">Sua empresa precisa estar onde os clientes procuram.</h2>
+          <p class="lead">Hoje, antes de visitar ou comprar, as pessoas pesquisam no Google. Ter um site profissional coloca seu negócio à frente da concorrência.</p>
+        </div>
+        <div class="why-list reveal">
+          <div class="why-item"><span class="check">✓</span><span>Mais credibilidade para seu negócio</span></div>
+          <div class="why-item"><span class="check">✓</span><span>Mais profissionalismo perante clientes</span></div>
+          <div class="why-item"><span class="check">✓</span><span>Mais facilidade no contato e atendimento</span></div>
+          <div class="why-item"><span class="check">✓</span><span>Mais presença digital no Google</span></div>
+          <div class="why-item"><span class="check">✓</span><span>Atendimento rápido pelo WhatsApp</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="contato">
+    <div class="container">
+      <div class="cta-wrap reveal">
+        <span class="eyebrow" style="background:rgba(38,132,255,.18);color:#7eb6ff">Vamos começar</span>
+        <h2 style="margin-top:14px">Vamos colocar sua empresa na internet?</h2>
+        <p>Solicite um orçamento e tenha um site moderno, rápido e pronto para gerar resultados para o seu negócio.</p>
+        <a href="https://wa.me/5548996507636?text=Olá%20David!%20Quero%20solicitar%20um%20orçamento%20para%20meu%20negócio." target="_blank" class="btn btn-brand btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2.1-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.3 3.6 5.7 5 2.1.8 3 .9 4 .8.6-.1 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4 0-.1-.3-.2-.6-.3M12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.5-1.2c1.4.7 3 1.2 4.5 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2"/></svg>
+          Falar no WhatsApp agora
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><img src="logo.png" alt="DavidStudio.Web" /><span>DavidStudio<span style="color:var(--brand)">.Web</span></span></a>
+        <p>Presença digital profissional para empresas locais.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navegação</h4>
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Processo</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#porque">Por que ter</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contato</h4>
+        <a href="https://wa.me/5548996507636" target="_blank">📱 +55 48 99650-7636</a>
+        <a href="https://www.instagram.com/davidstudio.web" target="_blank">📷 @davidstudio.web</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 DavidStudio.Web — Todos os direitos reservados.</span>
+      <span>Feito com ♥ por David</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5548996507636" target="_blank" class="wa-fab" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2.1-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.3 3.6 5.7 5 2.1.8 3 .9 4 .8.6-.1 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4 0-.1-.3-.2-.6-.3M12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.5-1.2c1.4.7 3 1.2 4.5 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2"/></svg>
+</a>
+
+<script>
+  // Scroll header
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY > 20); });
+  // Mobile menu
+  const mb = document.getElementById('menuBtn');
+  mb.addEventListener('click',()=> nav.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+  // Reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
